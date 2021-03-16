@@ -26,6 +26,7 @@
       <itemPath>common.c</itemPath>
       <itemPath>main.c</itemPath>
       <itemPath>time.c</itemPath>
+      <itemPath>LMT01.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

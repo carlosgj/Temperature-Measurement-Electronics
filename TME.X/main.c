@@ -35,6 +35,7 @@ void init(void){
     commInit();
     sendSUSEVR(SUS_INITIAL);
     sendSwVerEVR();
+    initSensors();
     __delay_ms(10);
     sendSUSEVR(SUS_INITDONE);
     
@@ -44,6 +45,7 @@ void init(void){
 void run(void){
     implementRx();
     processCommand();
+    measureSensors();
     sendTlm();
 }
 
