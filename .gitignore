@@ -1,0 +1,6 @@
+TME.X/dist/
+TME.X/build/
+TME.X/nbproject/Makefile-*
+*.*#*
+TME.X/nbproject/Package-*
+TME.X/nbproject/private/
