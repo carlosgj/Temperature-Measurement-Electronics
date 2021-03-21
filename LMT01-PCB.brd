@@ -1591,8 +1591,8 @@ for trimmer refence see : &lt;u&gt;www.electrospec-inc.com/cross_references/trim
 <smd name="1" x="-1.422" y="0" dx="1.6" dy="1.803" layer="1"/>
 <text x="-1.27" y="1.27" size="1.27" layer="25">&gt;NAME</text>
 <text x="-1.27" y="-2.54" size="1.27" layer="27">&gt;VALUE</text>
-<rectangle x1="-1.6891" y1="-0.8763" x2="-0.9525" y2="0.8763" layer="51"/>
-<rectangle x1="0.9525" y1="-0.8763" x2="1.6891" y2="0.8763" layer="51"/>
+<rectangle x1="-1.6891" y1="-0.8763" x2="-0.9525" y2="0.8763" layer="21"/>
+<rectangle x1="0.9525" y1="-0.8763" x2="1.6891" y2="0.8763" layer="21"/>
 <rectangle x1="-0.3" y1="-0.7" x2="0.3" y2="0.7" layer="35"/>
 <wire x1="-2.54" y1="1.27" x2="2.54" y2="1.27" width="0.127" layer="21"/>
 <wire x1="2.54" y1="1.27" x2="2.54" y2="-1.27" width="0.127" layer="21"/>
@@ -1614,10 +1614,10 @@ for trimmer refence see : &lt;u&gt;www.electrospec-inc.com/cross_references/trim
 <rectangle x1="-1.7018" y1="-0.8509" x2="-0.9517" y2="0.8491" layer="21"/>
 <rectangle x1="0.9517" y1="-0.8491" x2="1.7018" y2="0.8509" layer="21"/>
 <rectangle x1="-0.1999" y1="-0.4001" x2="0.1999" y2="0.4001" layer="35"/>
-<wire x1="-2.54" y1="1.27" x2="2.54" y2="1.27" width="0.127" layer="21"/>
-<wire x1="2.54" y1="1.27" x2="2.54" y2="-1.27" width="0.127" layer="21"/>
-<wire x1="2.54" y1="-1.27" x2="-2.54" y2="-1.27" width="0.127" layer="21"/>
-<wire x1="-2.54" y1="-1.27" x2="-2.54" y2="1.27" width="0.127" layer="21"/>
+<wire x1="-2.473" y1="0.983" x2="2.473" y2="0.983" width="0.127" layer="21"/>
+<wire x1="-2.473" y1="-0.983" x2="-2.473" y2="0.983" width="0.127" layer="21"/>
+<wire x1="2.473" y1="-0.983" x2="-2.473" y2="-0.983" width="0.127" layer="21"/>
+<wire x1="2.473" y1="0.983" x2="2.473" y2="-0.983" width="0.127" layer="21"/>
 </package>
 <package name="RTRIM4G/J">
 <description>&lt;b&gt;Trimm resistor&lt;/b&gt; VISHAY</description>
@@ -1845,6 +1845,40 @@ NS Package M08A</description>
 <rectangle x1="-0.88" y1="2" x2="-0.39" y2="3.1" layer="51"/>
 <rectangle x1="-2.15" y1="2" x2="-1.66" y2="3.1" layer="51"/>
 <circle x="-1.905" y="-0.635" radius="0.254" width="0" layer="21"/>
+</package>
+</packages>
+</library>
+<library name="led">
+<description>&lt;b&gt;LEDs&lt;/b&gt;&lt;p&gt;
+&lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;&lt;br&gt;
+Extended by Federico Battaglin &lt;author&gt;&amp;lt;federico.rd@fdpinternational.com&amp;gt;&lt;/author&gt; with DUOLED</description>
+<packages>
+<package name="CHIPLED_1206">
+<description>&lt;b&gt;CHIPLED&lt;/b&gt;&lt;p&gt;
+Source: http://www.osram.convergy.de/ ... LG_LY N971.pdf</description>
+<wire x1="-0.4" y1="1.6" x2="0.4" y2="1.6" width="0.1016" layer="21" curve="172.619069"/>
+<wire x1="-0.8" y1="-0.95" x2="-0.8" y2="0.95" width="0.1016" layer="21"/>
+<wire x1="0.8" y1="0.95" x2="0.8" y2="-0.95" width="0.1016" layer="21"/>
+<circle x="-0.55" y="1.425" radius="0.1" width="0.1016" layer="21"/>
+<smd name="C" x="0" y="1.75" dx="1.5" dy="1.5" layer="1"/>
+<smd name="A" x="0" y="-1.75" dx="1.5" dy="1.5" layer="1"/>
+<text x="-1.27" y="-1.27" size="1.27" layer="25" rot="R90">&gt;NAME</text>
+<text x="2.54" y="-1.27" size="1.27" layer="27" rot="R90">&gt;VALUE</text>
+<rectangle x1="-0.85" y1="1.525" x2="-0.35" y2="1.65" layer="21"/>
+<rectangle x1="-0.85" y1="1.225" x2="-0.625" y2="1.55" layer="21"/>
+<rectangle x1="-0.45" y1="1.225" x2="-0.325" y2="1.45" layer="21"/>
+<rectangle x1="-0.65" y1="1.225" x2="-0.225" y2="1.35" layer="21"/>
+<rectangle x1="0.35" y1="1.3" x2="0.85" y2="1.65" layer="21"/>
+<rectangle x1="0.25" y1="1.225" x2="0.85" y2="1.35" layer="21"/>
+<rectangle x1="-0.85" y1="0.95" x2="0.85" y2="1.25" layer="21"/>
+<rectangle x1="-0.85" y1="-1.65" x2="0.85" y2="-0.95" layer="21"/>
+<rectangle x1="-0.85" y1="0.35" x2="-0.525" y2="0.775" layer="21"/>
+<rectangle x1="0.525" y1="0.35" x2="0.85" y2="0.775" layer="21"/>
+<rectangle x1="-0.175" y1="0" x2="0.175" y2="0.35" layer="21"/>
+<wire x1="-1.27" y1="3.175" x2="1.27" y2="3.175" width="0.127" layer="21"/>
+<wire x1="1.27" y1="3.175" x2="1.27" y2="-3.175" width="0.127" layer="21"/>
+<wire x1="1.27" y1="-3.175" x2="-1.27" y2="-3.175" width="0.127" layer="21"/>
+<wire x1="-1.27" y1="-3.175" x2="-1.27" y2="3.175" width="0.127" layer="21"/>
 </package>
 </packages>
 </library>
@@ -2147,6 +2181,14 @@ Please make sure your boards conform to these design rules.</description>
 <element name="JP5" library="SparkFun-Jumpers" package="SMT-JUMPER_2_NO_SILK" value="JUMPER-SMT_2_NO_SILK" x="10.16" y="11.43" smashed="yes" rot="R270">
 <attribute name="NAME" x="11.303" y="11.43" size="0.8128" layer="25" font="fixed" ratio="20" rot="R270" align="bottom-center"/>
 </element>
+<element name="LED1" library="led" package="CHIPLED_1206" value="" x="109.22" y="7.62" smashed="yes" rot="R270">
+<attribute name="NAME" x="110.49" y="6.35" size="0.8128" layer="25" font="fixed" rot="R180"/>
+<attribute name="VALUE" x="107.95" y="5.08" size="1.27" layer="27"/>
+</element>
+<element name="R5" library="resistor" package="R1206" value="" x="102.87" y="7.62" smashed="yes" rot="R180">
+<attribute name="NAME" x="102.87" y="6.35" size="0.8128" layer="25" font="fixed" rot="R180"/>
+<attribute name="VALUE" x="104.14" y="10.16" size="1.27" layer="27" rot="R180"/>
+</element>
 </elements>
 <signals>
 <signal name="GND">
@@ -2191,6 +2233,10 @@ Please make sure your boards conform to these design rules.</description>
 <wire x1="95.46" y1="3.93" x2="97.67" y2="3.93" width="0.4064" layer="1"/>
 <wire x1="97.67" y1="3.93" x2="99.06" y2="2.54" width="0.4064" layer="1"/>
 <via x="99.06" y="2.54" extent="1-16" drill="0.5"/>
+<contactref element="LED1" pad="C"/>
+<wire x1="110.97" y1="7.62" x2="113.03" y2="7.62" width="0.4064" layer="1"/>
+<wire x1="113.03" y1="7.62" x2="114.3" y2="8.89" width="0.4064" layer="1"/>
+<wire x1="114.3" y1="8.89" x2="114.3" y2="13.97" width="0.4064" layer="1"/>
 </signal>
 <signal name="+5V">
 <contactref element="IC4" pad="1"/>
@@ -2218,10 +2264,11 @@ Please make sure your boards conform to these design rules.</description>
 <wire x1="82.42" y1="8.89" x2="82.55" y2="8.76" width="0.6096" layer="16"/>
 <wire x1="109.22" y1="15.9766" x2="109.22" y2="13.97" width="0.4064" layer="1"/>
 <wire x1="109.22" y1="13.97" x2="105.41" y2="10.16" width="0.4064" layer="1"/>
-<wire x1="105.41" y1="10.16" x2="97.51" y2="10.16" width="0.4064" layer="1"/>
+<wire x1="105.41" y1="10.16" x2="101.6" y2="10.16" width="0.4064" layer="1"/>
 <via x="97.51" y="10.16" extent="1-16" drill="0.5"/>
 <contactref element="IC1" pad="32"/>
 <contactref element="IC1" pad="11"/>
+<wire x1="101.6" y1="10.16" x2="97.51" y2="10.16" width="0.4064" layer="1"/>
 <wire x1="46.355" y1="10.16" x2="46.355" y2="17.78" width="1.016" layer="1"/>
 <wire x1="51.435" y1="5.08" x2="51.435" y2="2.54" width="1.016" layer="1"/>
 <contactref element="C5" pad="1"/>
@@ -2243,6 +2290,9 @@ Please make sure your boards conform to these design rules.</description>
 <wire x1="95.46" y1="6.23" x2="95.765" y2="6.23" width="0.4064" layer="1"/>
 <wire x1="95.765" y1="6.23" x2="97.51" y2="7.975" width="0.4064" layer="1"/>
 <wire x1="97.51" y1="10.16" x2="97.51" y2="7.975" width="0.4064" layer="1"/>
+<contactref element="R5" pad="2"/>
+<wire x1="101.448" y1="7.62" x2="101.6" y2="7.62" width="0.4064" layer="1"/>
+<wire x1="101.6" y1="7.62" x2="101.6" y2="10.16" width="0.4064" layer="1"/>
 </signal>
 <signal name="UARTRX">
 <contactref element="IC4" pad="2"/>
@@ -2675,6 +2725,11 @@ Please make sure your boards conform to these design rules.</description>
 <wire x1="10.16" y1="6.985" x2="12.065" y2="5.08" width="0.4064" layer="1"/>
 <contactref element="JP5" pad="2"/>
 <wire x1="10.16" y1="9.525" x2="10.16" y2="11.0236" width="0.4064" layer="1"/>
+</signal>
+<signal name="N$5">
+<contactref element="LED1" pad="A"/>
+<contactref element="R5" pad="1"/>
+<wire x1="104.292" y1="7.62" x2="107.47" y2="7.62" width="0.4064" layer="1"/>
 </signal>
 </signals>
 <errors>
