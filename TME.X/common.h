@@ -30,8 +30,8 @@
 
 #define SW_VER_STR "0.0.1"
 
-#define INTEN (INTCONbits.GIE = TRUE)
-#define INTDIS (INTCONbits.GIE = FALSE)
+#define INTEN (INTCON0bits.GIE = TRUE)
+#define INTDIS (INTCON0bits.GIE = FALSE)
 
 #define SYST_ERR_LEN (1)
 union SystErr_t {

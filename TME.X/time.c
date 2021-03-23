@@ -1,18 +1,25 @@
-#include <xc.h>
 #include "time.h"
 
+//TMR0 used for ms counter
+
 void timerInit(void){
-    
 #ifdef MSOUT
     TRISAbits.TRISA4 = OUTPUT;
     LATAbits.LATA4 = FALSE;
 #endif
+    T0CON0bits.T016BIT = FALSE;
+    T0CON1bits.T0CS = 0b010; //Fosc/4
+    T0CON1bits.T0CKPS = 0b0110; //1/64 prescaler
+    TMR0H = MS_TMR_VAL;
+    PIE3bits.TMR0IE = TRUE;
+    
     
 }
 
 //Implement ms timer
-inline void TMR0ISR(void){
+void __interrupt(irq(TMR0),high_priority) TMR0ISR(void){
     msCount++;
+    
 #ifdef MSOUT
     LATAbits.LATA4 = !LATAbits.LATA4;
 #endif

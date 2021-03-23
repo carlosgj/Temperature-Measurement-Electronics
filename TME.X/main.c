@@ -13,6 +13,8 @@ void init(void){
     
     //Setup oscillator
     
+    INTCON0bits.IPEN = TRUE;
+    INTCON0bits.GIEL = TRUE;
 #ifdef LOOPOUT
     TRISAbits.TRISA4 = OUTPUT;
 #endif
@@ -38,8 +40,6 @@ void init(void){
     initSensors();
     __delay_ms(10);
     sendSUSEVR(SUS_INITDONE);
-    
-    INTCONbits.PEIE = TRUE; //Enable peripheral interrupts
 }
 
 void run(void){

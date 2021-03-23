@@ -33,8 +33,5 @@ void RS422_TxByte(unsigned char theByte);
 //Safe to call even if we're already transmitting
 inline void RS422_StartTx(void);
 
-inline void RS422TXISR(void);
-inline void RS422RXISR(void);
-
 #endif
 

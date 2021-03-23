@@ -8,20 +8,19 @@ void RS422_Init(void){
     TRISBbits.TRISB0 = OUTPUT;
     ANSELCbits.ANSELC7 = FALSE;
     TRISCbits.TRISC7 = INPUT;
-    RX1PPS = 0b00010111; //RC7
-    RB0PPS = 0x09;
+    U1RXPPS = 0b00010111; //RC7
+    RB0PPS = 0x20;
     
     //Setup BRG
-    BAUD1CONbits.BRG16 = TRUE;
-    TX1STAbits.BRGH = TRUE;
-    SP1BRGH = 0;
-    SP1BRGL = 138;
+    U1CON0bits.BRGS = TRUE;
+    U1BRGH = 0;
+    U1BRGL = 138;
     
     //Setup transmitter
-    TX1STAbits.TXEN = TRUE;
+    U1CON0bits.TXEN = TRUE;
 
     //Setup receiver
-    RC1STAbits.CREN = TRUE;
+    U1CON0bits.RXEN = TRUE;
 
     //Setup interrupts
 #ifndef UNBUFFERED_SER
@@ -29,13 +28,13 @@ void RS422_Init(void){
 #endif
     
     //Turn on port
-    RC1STAbits.SPEN = TRUE;
+    U1CON1bits.ON = TRUE;
 }
 
 void RS422_TxByte(unsigned char theByte){
 #ifdef UNBUFFERED_SER
-    TX1REG = theByte;
-    while(!TX1STAbits.TRMT){
+    U1TXB = theByte;
+    while(!U1ERRIRbits.TXMTIF){
         
     }
 #else
@@ -83,16 +82,16 @@ inline void RS422TXISR(void){
 inline void RS422RXISR(void){
     if(RXBUF_FREE > 0){
         //Transfer into buffer
-        rxbuf[rxbufwrite++] = RCREG;
+        rxbuf[rxbufwrite++] = U1RXB;
     }
     else{
-        volatile unsigned char foo = RCREG; //Throw byte away
+        volatile unsigned char foo = U1RXB; //Throw byte away
         commErrors.rxBuffOvf++;
     }
-    if(RCSTAbits.FERR || RCSTAbits.OERR){
-        RCSTAbits.CREN = FALSE;
-        RCSTAbits.CREN = TRUE;
-        //TODO
-    }
+//    if(RCSTAbits.FERR || RCSTAbits.OERR){
+//        U1CON0bits.RXEN = FALSE;
+//        U1CON0bits.RXEN = TRUE;
+//        //TODO
+//    }
     
 }

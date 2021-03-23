@@ -2,6 +2,7 @@
 #define MAIN_H
 
 #include <xc.h>
+#include "config.h"
 #include "common.h"
 #include "RS422.h"
 #include "HDLC.h"
