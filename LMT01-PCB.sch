@@ -12128,16 +12128,16 @@ package type P</description>
 <pin name="RA3" x="-38.1" y="12.7" length="middle"/>
 <pin name="RA4" x="-38.1" y="10.16" length="middle"/>
 <pin name="RA5" x="-38.1" y="7.62" length="middle"/>
-<pin name="RA6" x="-38.1" y="5.08" length="middle"/>
-<pin name="RA7" x="-38.1" y="2.54" length="middle"/>
+<pin name="RA6/CLKOUT" x="-38.1" y="5.08" length="middle"/>
+<pin name="RA7/CLKIN" x="-38.1" y="2.54" length="middle"/>
 <pin name="RB0" x="-38.1" y="-2.54" length="middle"/>
 <pin name="RB1" x="-38.1" y="-5.08" length="middle"/>
 <pin name="RB2" x="-38.1" y="-7.62" length="middle"/>
 <pin name="RB3" x="-38.1" y="-10.16" length="middle"/>
 <pin name="RB4" x="-38.1" y="-12.7" length="middle"/>
 <pin name="RB5" x="-38.1" y="-15.24" length="middle"/>
-<pin name="RB6" x="-38.1" y="-17.78" length="middle"/>
-<pin name="RB7" x="-38.1" y="-20.32" length="middle"/>
+<pin name="RB6/PGC" x="-38.1" y="-17.78" length="middle"/>
+<pin name="RB7/PGD" x="-38.1" y="-20.32" length="middle"/>
 <pin name="RC0" x="35.56" y="20.32" length="middle" rot="R180"/>
 <pin name="RC1" x="35.56" y="17.78" length="middle" rot="R180"/>
 <pin name="RC2" x="35.56" y="15.24" length="middle" rot="R180"/>
@@ -12161,7 +12161,7 @@ package type P</description>
 <wire x1="-33.02" y1="-38.1" x2="30.48" y2="-38.1" width="0.254" layer="94"/>
 <wire x1="30.48" y1="-38.1" x2="30.48" y2="22.86" width="0.254" layer="94"/>
 <wire x1="30.48" y1="22.86" x2="-33.02" y2="22.86" width="0.254" layer="94"/>
-<pin name="RE3" x="35.56" y="-33.02" length="middle" rot="R180"/>
+<pin name="RE3/!MCLR" x="35.56" y="-33.02" length="middle" rot="R180"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -12178,16 +12178,16 @@ package type P</description>
 <connect gate="G$1" pin="RA3" pad="5"/>
 <connect gate="G$1" pin="RA4" pad="6"/>
 <connect gate="G$1" pin="RA5" pad="7"/>
-<connect gate="G$1" pin="RA6" pad="14"/>
-<connect gate="G$1" pin="RA7" pad="13"/>
+<connect gate="G$1" pin="RA6/CLKOUT" pad="14"/>
+<connect gate="G$1" pin="RA7/CLKIN" pad="13"/>
 <connect gate="G$1" pin="RB0" pad="33"/>
 <connect gate="G$1" pin="RB1" pad="34"/>
 <connect gate="G$1" pin="RB2" pad="35"/>
 <connect gate="G$1" pin="RB3" pad="36"/>
 <connect gate="G$1" pin="RB4" pad="37"/>
 <connect gate="G$1" pin="RB5" pad="38"/>
-<connect gate="G$1" pin="RB6" pad="39"/>
-<connect gate="G$1" pin="RB7" pad="40"/>
+<connect gate="G$1" pin="RB6/PGC" pad="39"/>
+<connect gate="G$1" pin="RB7/PGD" pad="40"/>
 <connect gate="G$1" pin="RC0" pad="15"/>
 <connect gate="G$1" pin="RC1" pad="16"/>
 <connect gate="G$1" pin="RC2" pad="17"/>
@@ -12207,7 +12207,7 @@ package type P</description>
 <connect gate="G$1" pin="RE0" pad="8"/>
 <connect gate="G$1" pin="RE1" pad="9"/>
 <connect gate="G$1" pin="RE2" pad="10"/>
-<connect gate="G$1" pin="RE3" pad="1"/>
+<connect gate="G$1" pin="RE3/!MCLR" pad="1"/>
 <connect gate="G$1" pin="VDD@1" pad="11"/>
 <connect gate="G$1" pin="VDD@2" pad="32"/>
 <connect gate="G$1" pin="VSS@1" pad="12"/>
@@ -12739,7 +12739,7 @@ package type P</description>
 <label x="38.1" y="0" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="IC1" gate="G$1" pin="RA6"/>
+<pinref part="IC1" gate="G$1" pin="RA6/CLKOUT"/>
 <wire x1="5.08" y1="-106.68" x2="-17.78" y2="-106.68" width="0.1524" layer="91"/>
 <label x="-10.16" y="-106.68" size="1.778" layer="95"/>
 </segment>
@@ -12763,7 +12763,7 @@ package type P</description>
 <label x="38.1" y="-2.54" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="IC1" gate="G$1" pin="RA7"/>
+<pinref part="IC1" gate="G$1" pin="RA7/CLKIN"/>
 <wire x1="5.08" y1="-109.22" x2="-17.78" y2="-109.22" width="0.1524" layer="91"/>
 <label x="-10.16" y="-109.22" size="1.778" layer="95"/>
 </segment>
@@ -12971,21 +12971,21 @@ package type P</description>
 </net>
 <net name="N$1" class="0">
 <segment>
-<pinref part="IC1" gate="G$1" pin="RE3"/>
+<pinref part="IC1" gate="G$1" pin="RE3/!MCLR"/>
 <pinref part="PROG" gate="-1" pin="S"/>
 <wire x1="81.28" y1="-144.78" x2="78.74" y2="-144.78" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$2" class="0">
 <segment>
-<pinref part="IC1" gate="G$1" pin="RB7"/>
+<pinref part="IC1" gate="G$1" pin="RB7/PGD"/>
 <pinref part="PROG" gate="-4" pin="S"/>
 <wire x1="2.54" y1="-132.08" x2="5.08" y2="-132.08" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$3" class="0">
 <segment>
-<pinref part="IC1" gate="G$1" pin="RB6"/>
+<pinref part="IC1" gate="G$1" pin="RB6/PGC"/>
 <pinref part="PROG" gate="-5" pin="S"/>
 <wire x1="2.54" y1="-129.54" x2="5.08" y2="-129.54" width="0.1524" layer="91"/>
 </segment>
