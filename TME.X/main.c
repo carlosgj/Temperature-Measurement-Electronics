@@ -52,3 +52,7 @@ void run(void){
 void processCommand(void){
     
 }
+
+void __interrupt(irq(default),high_priority) DefaultISR(void){
+    systErr.unhandledInt++;
+}

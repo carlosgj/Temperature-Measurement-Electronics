@@ -66,34 +66,42 @@ void sendBufBE(unsigned char *buf, unsigned int count, enum TlmType commandByte)
 }
 
 void implementRx(void){
-    //Check if there are unprocessed bytes in rx queue
-    unsigned char toRead;
-    static unsigned char isEscape = FALSE;
+    static unsigned char escapeNextByte = FALSE;
     static unsigned char isInMessage = FALSE;
     //__delay_ms(5);
-    for(toRead = (unsigned char)(0x3f - RXBUF_FREE); toRead > 0; toRead--){
+    
+    //Check if there are unprocessed bytes in rx queue
+    unsigned char used = (unsigned char)(rxbufwrite - rxbufread);
+    
+    //Check HWM
+    if(used > rxHighWaterMark){
+        rxHighWaterMark = used;
+    }
+    
+    for(; used > 0; used--){
         unsigned char newByte = rxbuf[rxbufread++];
-        rxbufread &= 0x3f;
         
+        //Check if escape byte
         if(newByte == HDLC_ESCAPE){
-            isEscape = TRUE;
+            escapeNextByte = TRUE;
             continue;
         }
 
         //Not an escape byte
-        if(isEscape){
+        if(escapeNextByte){
             if((newByte & 0b00100000) != 0){
                 //We got an escape byte and then a byte without bit 5 clear
                 //Abort reception
                 isInMessage = FALSE;
+                escapeNextByte = FALSE;
                 framePtr = 0;
                 commErrors.byteStuff++;
                 continue;
             }
             else{
                 frameBuf[framePtr++] = (unsigned char)(newByte ^ 0b00100000);
+                escapeNextByte = FALSE;
             }
-            isEscape = FALSE;
         }
         else{
             frameBuf[framePtr++] = newByte;
@@ -110,6 +118,8 @@ void implementRx(void){
             }
             else{
                 //We got a stop byte when a message wasn't in progress
+                isInMessage = FALSE;
+                framePtr = 0;
                 commErrors.framing++;
             }
         }
@@ -117,8 +127,9 @@ void implementRx(void){
         if(newByte == HDLC_START){
             if(isInMessage){
                 //We got a start byte while a message was in progress
-                commErrors.framing++;
+                isInMessage = FALSE;
                 framePtr = 0;
+                commErrors.framing++;
             }
             else{
                 isInMessage = TRUE;
@@ -127,9 +138,9 @@ void implementRx(void){
         
         if(framePtr == FRAMEBUF_SIZE){
             //Buffer overrun
-            commErrors.oversizeFrame++;
             framePtr = 0;
             isInMessage = FALSE;
+            commErrors.oversizeFrame++;
         }
     }
 }

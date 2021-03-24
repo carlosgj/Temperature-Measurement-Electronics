@@ -38,9 +38,17 @@ void RS422_TxByte(unsigned char theByte){
         
     }
 #else
-    if(TXBUF_FREE > 0){
+    unsigned char used = (unsigned char)(txbufwrite - txbufread);
+    unsigned char free = (unsigned char)((TX_BUF_SIZE-1)-used);
+    if(free != 0){
         //There's room in the buffer
         txbuf[txbufwrite++] = theByte;
+        
+        //If the fullness of the buffer was equal to HWM *before* the increment,
+        //now it's one greater
+        if(used == txHighWaterMark){
+            txHighWaterMark++;
+        }
     }
     else{
         commErrors.txBuffOvf++;
@@ -51,7 +59,7 @@ void RS422_TxByte(unsigned char theByte){
 inline void RS422_StartTx(void){
 #ifndef UNBUFFERED_SER
     //Check if we're already transmitting
-    if(PIE3bits.TX1IE){
+    if(PIE4bits.U1TXIE){
         return;
     }
     
@@ -60,30 +68,31 @@ inline void RS422_StartTx(void){
         return;
     }
     
-    TXREG = txbuf[txbufread++];
-    PIE3bits.TX1IE = TRUE;
+    U1TXB = txbuf[txbufread++];
+    PIE4bits.U1TXIE = TRUE;
     
 #endif
 }
 
-inline void RS422TXISR(void){
+void __interrupt(irq(U1TX),high_priority) RS422TXISR(void){
 #ifndef UNBUFFERED_SER
     //If there's no more data in the buffer, disable interrupt
     if(txbufread == txbufwrite){
-        PIE3bits.TX1IE = FALSE;
+        PIE4bits.U1TXIE = FALSE;
         return;
     }
     //Transmit the next character
-    TXREG = txbuf[txbufread++];
+    U1TXB = txbuf[txbufread++];
 
 #endif
 }
 
-inline void RS422RXISR(void){
+void __interrupt(irq(U1RX),high_priority) RS422RXISR(void){
     if(RXBUF_FREE > 0){
         //Transfer into buffer
         rxbuf[rxbufwrite++] = U1RXB;
     }
+    //So as not to slow down the interrupt, HWM checking is done in implementRx
     else{
         volatile unsigned char foo = U1RXB; //Throw byte away
         commErrors.rxBuffOvf++;
