@@ -1,6 +1,7 @@
 #include "main.h"
 
 void main(void) {
+    getResetCause();
     init();
     while(TRUE){
         run();
@@ -37,6 +38,7 @@ void init(void){
     commInit();
     sendSUSEVR(SUS_INITIAL);
     sendSwVerEVR();
+    //TODO: report reset cause
     initSensors();
     __delay_ms(10);
     sendSUSEVR(SUS_INITDONE);
@@ -53,6 +55,67 @@ void processCommand(void){
     
 }
 
-void __interrupt(irq(default),high_priority) DefaultISR(void){
+void getResetCause(void){
+    //Attempt to figure out what caused reset
+    if(!PCON1bits.nMEMV){
+        //Memory violation
+        resetCause = RS_MEM;
+        PCON1bits.nMEMV = TRUE;
+        return;
+    }
+    
+    if(PCON0bits.STKOVF){
+        //Stack overflow
+        resetCause = RS_SO;
+        PCON0bits.STKOVF = FALSE;
+        return;
+    }
+    
+    if(PCON0bits.STKUNF){
+        //Stack underflow
+        resetCause = RS_SU;
+        PCON0bits.STKUNF = FALSE;
+        return;
+    }
+    
+    if(!PCON0bits.nWDTWV){
+        //WDT window violation
+        resetCause = RS_WIN;
+        PCON0bits.nWDTWV = TRUE;
+        return;
+    }
+    
+    if(!PCON0bits.nRWDT){
+        //WDT reset
+        resetCause = RS_WDT;
+        PCON0bits.nRWDT = TRUE;
+        return;
+    }
+    
+    if(!PCON0bits.nRMCLR){
+        //MCLR
+        resetCause = RS_MCLR;
+        PCON0bits.nRMCLR = TRUE;
+        return;
+    }
+    
+    if(!PCON0bits.nPOR){
+        //Power-on reset
+        resetCause = RS_POR;
+        PCON0bits.nPOR = TRUE;
+        return;
+    }
+    
+    if(!PCON0bits.nBOR){
+        //Brownout
+        resetCause = RS_BOR;
+        PCON0bits.nBOR = TRUE;
+        return;
+    }
+    
+}
+
+void __interrupt(irq(default),high_priority) DefaultISR(unsigned char id){
     systErr.unhandledInt++;
+    systErr.lastUnhandledInt = id;
 }

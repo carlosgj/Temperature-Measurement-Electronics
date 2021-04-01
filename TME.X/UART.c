@@ -1,5 +1,5 @@
 #include <xc.h>
-#include "RS422.h"
+#include "UART.h"
 
 void RS422_Init(void){
     

@@ -4,7 +4,7 @@
 #include <xc.h>
 #include <string.h>
 #include "common.h"
-#include "RS422.h"
+#include "UART.h"
 #include "commConstants.h"
 
 #define HDLC_START      (0x7f)
@@ -14,7 +14,7 @@
 #define HDLC_TS_ABORT   (0x7b)
 
 #define MAX_RX_SIZE     (16)
-#define RX_MSG_QUEUE    (4)
+#define RX_MSG_QUEUE    (6)
 #define FRAMEBUF_SIZE   (MAX_RX_SIZE+2)
 
 //Checks if a byte is a control byte
@@ -40,7 +40,7 @@ void HDLCInit(void);
 void sendBufBE(unsigned char *buf, unsigned int count, enum TlmType commandByte);
 void sendBufLE(unsigned char *buf, unsigned int count, enum TlmType commandByte);
 
-//This function is responsible for taking bytes out of the 422 Rx queue and 
+//This function is responsible for taking bytes out of the UART Rx queue and 
 // chunking them up into HDLC frames.
 void implementRx(void);
 

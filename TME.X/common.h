@@ -3,6 +3,7 @@
 
 #include <xc.h> // include processor files - each processor file is guarded.  
 #include <stdint.h>
+#include <pic18f47q84.h>
 
 //######### Debug options ###########
 
@@ -14,7 +15,7 @@
 //#define MSOUT
 
 //Uncomment to send one byte at a time to the UART, instead of using software buffering
-#define UNBUFFERED_SER
+//#define UNBUFFERED_SER
 
 //Uncomment to send test patterns in packets instead of real telemetry
 //#define TLM_TEST_PATTERN
@@ -33,11 +34,12 @@
 #define INTEN (INTCON0bits.GIE = TRUE)
 #define INTDIS (INTCON0bits.GIE = FALSE)
 
-#define SYST_ERR_LEN (1)
+#define SYST_ERR_LEN (2)
 union SystErr_t {
     unsigned char all[SYST_ERR_LEN];
     struct{
         unsigned char unhandledInt;
+        unsigned char lastUnhandledInt;
     };
 } systErr;
 
@@ -51,6 +53,23 @@ union SystStatus_t{
         unsigned RESERVED :5;
     };
 } systStat;
+
+enum ResetCause {
+    RS_POR,
+    RS_BOR,
+    RS_MCLR,
+    RS_WDT,
+    RS_WIN,
+    RS_RST,
+    RS_SO,
+    RS_SU,
+    RS_DP,
+    RS_VREG,
+    RS_MEM,
+    RS_INVALID
+};
+
+enum ResetCause resetCause = RS_INVALID;
 
 unsigned int msCount = 0;
 
