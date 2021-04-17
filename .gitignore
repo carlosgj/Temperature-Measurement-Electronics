@@ -4,3 +4,6 @@ TME.X/nbproject/Makefile-*
 *.*#*
 TME.X/nbproject/Package-*
 TME.X/nbproject/private/
+COSMOS/Vendor/
+COSMOS/TME/outputs/tmp/
+COSMOS/TME/outputs/logs/

@@ -39,7 +39,7 @@ void RS422_TxByte(unsigned char theByte){
     }
 #else
     unsigned char used = (unsigned char)(txbufwrite - txbufread);
-    unsigned char free = (unsigned char)((TX_BUF_SIZE-1)-used);
+    unsigned char free = (unsigned char)(255-used);
     if(free != 0){
         //There's room in the buffer
         txbuf[txbufwrite++] = theByte;

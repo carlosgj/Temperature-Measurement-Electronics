@@ -49,6 +49,7 @@ void run(void){
     processCommand();
     measureSensors();
     sendTlm();
+    __delay_ms(10);
 }
 
 void processCommand(void){
