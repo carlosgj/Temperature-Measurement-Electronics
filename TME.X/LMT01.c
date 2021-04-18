@@ -23,7 +23,21 @@ void initSensors(void) {
     LATBbits.LATB5 = TRUE; //A7
     LATAbits.LATA0 = TRUE; //A8
 
+    //Common A
+    TRISBbits.TRISB3 = INPUT;
+    WPUBbits.WPUB3 = FALSE;
+    T1CKIPPSbits.PORT = 0b001; //PORTB
+    T1CKIPPSbits.PIN = 3;
+    
+    //Common B
+    //TODO
+    
+    //Common C
+    //TODO
+    
     //Counters
+    T1CONbits.NOT_SYNC = TRUE;
+    T1CLKbits.CS = 0; //Source is T1CKIPPS
 }
 
 void measureSensors(void) {
@@ -39,9 +53,6 @@ void measureSensors(void) {
                     TRISDbits.TRISD4 = OUTPUT;
                     TRISDbits.TRISD2 = OUTPUT;
                     break;
-                default:
-                    //TODO: error handling
-                    break;
             }
             sensorState = CONV;
             lastTransitionTime = msCount;
@@ -53,7 +64,11 @@ void measureSensors(void) {
                 return;
             }
             //If it has, setup counters
+            TMR1L = 0;
+            TMR1H = 0;
+            TMR1CONbits.ON = TRUE;
             //TODO
+            
             sensorState = READOUT;
             lastTransitionTime = msCount;
             break;
@@ -62,8 +77,23 @@ void measureSensors(void) {
             if((msCount-lastTransitionTime) < READOUT_TIME){
                 return;
             }
+            
             //Collect new values from counters
-            //TODO
+            bankA[sensorIndex] = (((unsigned int)(TMR1H))<<8)+TMR1L;
+            bankB[sensorIndex] = (((unsigned int)(TMR3H))<<8)+TMR3L;
+            bankC[sensorIndex] = (((unsigned int)(TMR5H))<<8)+TMR5L;
+            
+            //Shut down counters
+            T1CONbits.ON = FALSE;
+            
+            //Turn off power
+            switch (sensorIndex) {
+                case 0:
+                    TRISBbits.TRISB1 = INPUT;
+                    TRISDbits.TRISD4 = INPUT;
+                    TRISDbits.TRISD2 = INPUT;
+                    break;
+            }
             
             sensorState = IDLE;
             lastTransitionTime = msCount;
