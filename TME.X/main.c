@@ -56,10 +56,16 @@ void run(void){
 #ifdef LOOPOUT
     LATAbits.LATA0 = !LATAbits.LATA0;
 #endif
+    
     implementRx();
     processCommand();
     measureSensors();
     sendTlm();
+    
+    //Check if this loop time exceeded MAIN_LOOP_PER
+    if((msCount - lastMainRun) > MAIN_LOOP_PER){
+        systErr.loopOverruns++;
+    }
 }
 
 void processCommand(void){

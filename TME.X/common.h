@@ -34,12 +34,13 @@
 #define INTEN (INTCON0bits.GIE = TRUE)
 #define INTDIS (INTCON0bits.GIE = FALSE)
 
-#define SYST_ERR_LEN (2)
+#define SYST_ERR_LEN (3)
 union SystErr_t {
     unsigned char all[SYST_ERR_LEN];
     struct{
         unsigned char unhandledInt;
         unsigned char lastUnhandledInt;
+        unsigned char loopOverruns;
     };
 } systErr;
 
