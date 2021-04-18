@@ -22,9 +22,6 @@ unsigned char rxbuf[RX_BUF_SIZE];
 volatile unsigned char rxbufwrite = 0;
 volatile unsigned char rxbufread = 0;
 
-unsigned char txHighWaterMark = 0;
-unsigned char rxHighWaterMark = 0;
-
 void RS422_Init(void);
 void RS422_TxByte(unsigned char theByte);
 //void RS422_SendBytes(unsigned char *buf, unsigned char count);

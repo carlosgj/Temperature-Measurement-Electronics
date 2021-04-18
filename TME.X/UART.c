@@ -46,8 +46,8 @@ void RS422_TxByte(unsigned char theByte){
         
         //If the fullness of the buffer was equal to HWM *before* the increment,
         //now it's one greater
-        if(used == txHighWaterMark){
-            txHighWaterMark++;
+        if(used == commErrors.txBuffHWM){
+            commErrors.txBuffHWM++;
         }
     }
     else{

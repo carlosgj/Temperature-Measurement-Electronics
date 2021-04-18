@@ -74,8 +74,8 @@ void implementRx(void){
     unsigned char used = (unsigned char)(rxbufwrite - rxbufread);
     
     //Check HWM
-    if(used > rxHighWaterMark){
-        rxHighWaterMark = used;
+    if(used > commErrors.rxBuffHWM){
+        commErrors.rxBuffHWM = used;
     }
     
     for(; used > 0; used--){

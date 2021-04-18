@@ -16,6 +16,8 @@
 union commError_t {
     unsigned char all[COMM_ERR_LEN];
     struct {
+        unsigned char txBuffHWM;
+        unsigned char rxBuffHWM;
         unsigned char txBuffOvf;
         unsigned char rxBuffOvf;
         unsigned char frameBufOvf;
