@@ -1,0 +1,5 @@
+# This is a segment of the main cmd_tlm_server.txt that will be used with
+# AUTO_INTERFACE_TARGETS or INTERFACE_TARGET
+
+INTERFACE TME-UDP udp_interface.rb 127.0.0.1 8011 8010 nil nil 128 10.0 nil
+  TARGET TME
