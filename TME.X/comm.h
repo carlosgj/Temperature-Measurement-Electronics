@@ -6,12 +6,13 @@
 #include "common.h"
 #include "commConstants.h"
 #include "HDLC.h"
+#include "LMT01.h"
 
 #define PRINT(x) sendBufBE((unsigned char *)x, sizeof(x), TLM_TEXT)
 //#define PRINT(x) RS422_SendBytes((unsigned char *)x, sizeof(x))
 
 
-#define TLM_PERIOD_TAB_LEN (3)
+#define TLM_PERIOD_TAB_LEN (6)
 
 #define COMM_ERR_LEN (10)
 union commError_t {
@@ -36,10 +37,13 @@ union TlmPeriodTab_t {
         unsigned char SystStat;
         unsigned char SystErr;
         unsigned char CommErr;
+        unsigned char TempA;
+        unsigned char TempB;
+        unsigned char TempC;
     };
 } TlmPeriodTab, TlmElapsed;
 
-const union TlmPeriodTab_t defaultTlmPeriods = {50, 100, 100};
+const union TlmPeriodTab_t defaultTlmPeriods = {50, 100, 100, 100, 100, 100};
 
 void commInit(void);
 void sendTlm(void);
@@ -48,6 +52,8 @@ void sendSystStatTlm(void);
 void sendSystErrorTlm(void);
 void sendSUSEVR(enum StartupSeqLocation loc);
 void sendSwVerEVR(void);
-
+void sendTempAReadings(void);
+void sendTempBReadings(void);
+void sendTempCReadings(void);
 #endif
 

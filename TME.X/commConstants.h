@@ -15,6 +15,10 @@ enum TlmType{
     TLM_EVR =       3,
     TLM_SYSTERR =   4,
     TLM_COMMERR =   5,
+    TLM_EEPERR =    6,
+    TLM_TEMPA =     7,
+    TLM_TEMPB =     8,
+    TLM_TEMPC =     9,
 };
 
 enum EVRID {
