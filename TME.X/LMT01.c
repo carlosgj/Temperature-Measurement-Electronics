@@ -1,7 +1,6 @@
 #include "LMT01.h"
 
 void initSensors(void) {
-    //TRIS
     //Bank A
     TRISBbits.TRISB1 = INPUT; //A1
     TRISAbits.TRISA3 = INPUT; //A2
@@ -11,9 +10,6 @@ void initSensors(void) {
     TRISAbits.TRISA1 = INPUT; //A6
     TRISBbits.TRISB5 = INPUT; //A7
     TRISAbits.TRISA0 = INPUT; //A8
-
-    //LAT
-    //Bank A
     LATBbits.LATB1 = TRUE; //A1
     LATAbits.LATA3 = TRUE; //A2
     LATBbits.LATB2 = TRUE; //A3
@@ -22,6 +18,24 @@ void initSensors(void) {
     LATAbits.LATA1 = TRUE; //A6
     LATBbits.LATB5 = TRUE; //A7
     LATAbits.LATA0 = TRUE; //A8
+    
+    //Bank B
+    TRISDbits.TRISD4 = INPUT; //B1
+    TRISAbits.TRISA6 = INPUT; //B2
+    TRISDbits.TRISD5 = INPUT; //B3
+    TRISAbits.TRISA7 = INPUT; //B4
+    TRISDbits.TRISD6 = INPUT; //B5
+    TRISDbits.TRISD7 = INPUT; //B6
+    TRISEbits.TRISE2 = INPUT; //B7
+    TRISEbits.TRISE1 = INPUT; //B8
+    LATDbits.LATD4 = TRUE; //B1
+    LATAbits.LATA6 = TRUE; //B2
+    LATDbits.LATD5 = TRUE; //B3
+    LATAbits.LATA7 = TRUE; //B4
+    LATDbits.LATD6 = TRUE; //B5
+    LATDbits.LATD7 = TRUE; //B6
+    LATEbits.LATE2 = TRUE; //B7
+    LATEbits.LATE1 = TRUE; //B8
 
     //Common A
     TRISBbits.TRISB3 = INPUT;
@@ -53,6 +67,41 @@ void measureSensors(void) {
                     TRISDbits.TRISD4 = OUTPUT;
                     TRISDbits.TRISD2 = OUTPUT;
                     break;
+                case 1:
+                    TRISAbits.TRISA3 = OUTPUT;
+                    TRISAbits.TRISA6 = OUTPUT;
+                    TRISDbits.TRISD3 = OUTPUT;
+                    break;
+                case 2:
+                    TRISBbits.TRISB2 = OUTPUT;
+                    TRISDbits.TRISD5 = OUTPUT;
+                    TRISCbits.TRISC4 = OUTPUT;
+                    break;
+                case 3:
+                    TRISAbits.TRISA2 = OUTPUT;
+                    TRISAbits.TRISA7 = OUTPUT;
+                    TRISCbits.TRISC5 = OUTPUT;
+                    break;
+                case 4:
+                    TRISBbits.TRISB4 = OUTPUT;
+                    TRISDbits.TRISD6 = OUTPUT;
+                    TRISDbits.TRISD1 = OUTPUT;
+                    break;
+                case 5:
+                    TRISAbits.TRISA1 = OUTPUT;
+                    TRISDbits.TRISD7 = OUTPUT;
+                    TRISDbits.TRISD0 = OUTPUT;
+                    break;
+                case 6:
+                    TRISBbits.TRISB5 = OUTPUT;
+                    TRISEbits.TRISE2 = OUTPUT;
+                    TRISCbits.TRISC3 = OUTPUT;
+                    break;
+                case 7:
+                    TRISAbits.TRISA0 = OUTPUT;
+                    TRISEbits.TRISE1 = OUTPUT;
+                    TRISCbits.TRISC2 = OUTPUT;
+                    break;
             }
             sensorState = CONV;
             lastTransitionTime = msCount;
@@ -67,7 +116,12 @@ void measureSensors(void) {
             TMR1L = 0;
             TMR1H = 0;
             TMR1CONbits.ON = TRUE;
-            //TODO
+            TMR3L = 0;
+            TMR3H = 0;
+            TMR3CONbits.ON = TRUE;
+            TMR5L = 0;
+            TMR5H = 0;
+            TMR5CONbits.ON = TRUE;
             
             sensorState = READOUT;
             lastTransitionTime = msCount;
@@ -79,9 +133,9 @@ void measureSensors(void) {
             }
             
             //Collect new values from counters
-            bankA[sensorIndex] = (((unsigned int)(TMR1H))<<8)+TMR1L;
-            bankB[sensorIndex] = (((unsigned int)(TMR3H))<<8)+TMR3L;
-            bankC[sensorIndex] = (((unsigned int)(TMR5H))<<8)+TMR5L;
+            bankA.readings[sensorIndex] = (((unsigned int)(TMR1H))<<8)+TMR1L;
+            bankB.readings[sensorIndex] = (((unsigned int)(TMR3H))<<8)+TMR3L;
+            bankC.readings[sensorIndex] = (((unsigned int)(TMR5H))<<8)+TMR5L;
             
             //Shut down counters
             T1CONbits.ON = FALSE;
@@ -92,6 +146,41 @@ void measureSensors(void) {
                     TRISBbits.TRISB1 = INPUT;
                     TRISDbits.TRISD4 = INPUT;
                     TRISDbits.TRISD2 = INPUT;
+                    break;
+                case 1:
+                    TRISAbits.TRISA3 = INPUT;
+                    TRISAbits.TRISA6 = INPUT;
+                    TRISDbits.TRISD3 = INPUT;
+                    break;
+                case 2:
+                    TRISBbits.TRISB2 = INPUT;
+                    TRISDbits.TRISD5 = INPUT;
+                    TRISCbits.TRISC4 = INPUT;
+                    break;
+                case 3:
+                    TRISAbits.TRISA2 = INPUT;
+                    TRISAbits.TRISA7 = INPUT;
+                    TRISCbits.TRISC5 = INPUT;
+                    break;
+                case 4:
+                    TRISBbits.TRISB4 = INPUT;
+                    TRISDbits.TRISD6 = INPUT;
+                    TRISDbits.TRISD1 = INPUT;
+                    break;
+                case 5:
+                    TRISAbits.TRISA1 = INPUT;
+                    TRISDbits.TRISD7 = INPUT;
+                    TRISDbits.TRISD0 = INPUT;
+                    break;
+                case 6:
+                    TRISBbits.TRISB5 = INPUT;
+                    TRISEbits.TRISE2 = INPUT;
+                    TRISCbits.TRISC3 = INPUT;
+                    break;
+                case 7:
+                    TRISAbits.TRISA0 = INPUT;
+                    TRISEbits.TRISE1 = INPUT;
+                    TRISCbits.TRISC2 = INPUT;
                     break;
             }
             

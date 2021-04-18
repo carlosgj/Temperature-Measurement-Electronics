@@ -23,9 +23,10 @@ enum SensorState_t sensorState = IDLE;
 unsigned char sensorIndex = 0;
 unsigned int lastTransitionTime = 0;
 
-unsigned int bankA[8];
-unsigned int bankB[8];
-unsigned int bankC[8];
+union TempReadings_t{
+    unsigned int readings[8];
+    unsigned char bytes[16];
+} bankA, bankB, bankC;
 
 void initSensors(void);
 void measureSensors(void);
