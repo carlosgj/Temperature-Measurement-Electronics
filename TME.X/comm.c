@@ -99,10 +99,9 @@ void sendCommErrorTlm(void){
 
 void sendSystStatTlm(void){
 #ifdef TLM_TEST_PATTERN
-    systStat.inputVoltage = 0x0201;
-    systStat.TMC429Stat = 1;
-    systStat.motEn = 1;
+
 #endif
+    systStat.seconds = msCount/1000;
     sendBufBE(systStat.all, SYST_STAT_LEN, TLM_SYSTSTAT);
 }
 

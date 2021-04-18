@@ -44,14 +44,11 @@ union SystErr_t {
     };
 } systErr;
 
-#define SYST_STAT_LEN (3)
+#define SYST_STAT_LEN (1)
 union SystStatus_t{
     unsigned char all[SYST_STAT_LEN];
     struct{
-        uint16_t inputVoltage;
-        unsigned motEn  :1;
-        unsigned TMC429Stat :2;
-        unsigned RESERVED :5;
+        unsigned char seconds;
     };
 } systStat;
 
