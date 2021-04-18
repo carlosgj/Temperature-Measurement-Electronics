@@ -1,6 +1,6 @@
 #include "LMT01.h"
 
-void initSensors(void){
+void initSensors(void) {
     //TRIS
     //Bank A
     TRISBbits.TRISB1 = INPUT; //A1
@@ -11,7 +11,7 @@ void initSensors(void){
     TRISAbits.TRISA1 = INPUT; //A6
     TRISBbits.TRISB5 = INPUT; //A7
     TRISAbits.TRISA0 = INPUT; //A8
-    
+
     //LAT
     //Bank A
     LATBbits.LATB1 = TRUE; //A1
@@ -22,34 +22,51 @@ void initSensors(void){
     LATAbits.LATA1 = TRUE; //A6
     LATBbits.LATB5 = TRUE; //A7
     LATAbits.LATA0 = TRUE; //A8
-    
+
     //Counters
 }
 
-void measureSensors(void){
-    //If we're waiting for measurement to complete, do nothing
-    if((msCount - sensorStartTime) < LMT01_ACQ_DELAY){
-        return;
-    }
-    
-    //Otherwise, store results, increment index, and kick off new measurement
-    
-    sensorIndex++; 
-    sensorIndex &= 7;
-    
-    //Setup counters
-    
-    
-    //Setup power
-    switch(sensorIndex){
-        case 0:
-            TRISBbits.TRISB1 = OUTPUT;
-            TRISDbits.TRISD4 = OUTPUT;
-            TRISDbits.TRISD2 = OUTPUT;
+void measureSensors(void) {
+    switch (sensorState) {
+        case IDLE:
+            //Setup sensors
+            sensorIndex++;
+            sensorIndex &= 7;
+            //Setup power
+            switch (sensorIndex) {
+                case 0:
+                    TRISBbits.TRISB1 = OUTPUT;
+                    TRISDbits.TRISD4 = OUTPUT;
+                    TRISDbits.TRISD2 = OUTPUT;
+                    break;
+                default:
+                    //TODO: error handling
+                    break;
+            }
+            sensorState = CONV;
+            lastTransitionTime = msCount;
             break;
-        default:
-            //TODO: error handling
+            
+        case CONV:
+            //If CONV_TIME hasn't elapsed yet, return
+            if((msCount-lastTransitionTime) < CONV_TIME){
+                return;
+            }
+            //If it has, setup counters
+            //TODO
+            sensorState = READOUT;
+            lastTransitionTime = msCount;
+            break;
+
+        case READOUT:
+            if((msCount-lastTransitionTime) < READOUT_TIME){
+                return;
+            }
+            //Collect new values from counters
+            //TODO
+            
+            sensorState = IDLE;
+            lastTransitionTime = msCount;
             break;
     }
-    sensorStartTime = msCount;
 }
