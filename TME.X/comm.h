@@ -10,9 +10,10 @@
 #define PRINT(x) sendBufBE((unsigned char *)x, sizeof(x), TLM_TEXT)
 //#define PRINT(x) RS422_SendBytes((unsigned char *)x, sizeof(x))
 
-#define COMM_ERR_LEN (8)
+
 #define TLM_PERIOD_TAB_LEN (3)
 
+#define COMM_ERR_LEN (10)
 union commError_t {
     unsigned char all[COMM_ERR_LEN];
     struct {

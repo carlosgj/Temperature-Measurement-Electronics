@@ -64,6 +64,8 @@ void sendCommErrorTlm(void){
     commErrors.oversizeFrame = 6;
     commErrors.framing = 7;
     commErrors.unkOpcode = 8;
+    commErrors.rxBuffHWM = 0x55;
+    commErrors.txBuffHWM = 0xAA;
 #endif
     sendBufBE(commErrors.all, COMM_ERR_LEN, TLM_COMMERR);
 }
