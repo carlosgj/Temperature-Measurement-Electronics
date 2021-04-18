@@ -42,14 +42,24 @@ void init(void){
     initSensors();
     __delay_ms(10);
     sendSUSEVR(SUS_INITDONE);
+    
+#if defined(LOOPOUT) || defined(MSOUT)
+    TRISAbits.TRISA0 = OUTPUT;
+#endif
 }
 
 void run(void){
+    if((unsigned int)(msCount - lastMainRun) < MAIN_LOOP_PER){
+        return;
+    }
+    lastMainRun = msCount;
+#ifdef LOOPOUT
+    LATAbits.LATA0 = !LATAbits.LATA0;
+#endif
     implementRx();
     processCommand();
     measureSensors();
     sendTlm();
-    __delay_ms(10);
 }
 
 void processCommand(void){
