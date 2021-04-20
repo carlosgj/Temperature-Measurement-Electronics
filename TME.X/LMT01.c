@@ -38,20 +38,21 @@ void initSensors(void) {
     LATEbits.LATE1 = TRUE; //B8
 
     //Common A
+    //TMR3 for bank A
     TRISBbits.TRISB3 = INPUT;
-    WPUBbits.WPUB3 = FALSE;
-    T1CKIPPSbits.PORT = 0b001; //PORTB
-    T1CKIPPSbits.PIN = 3;
+    WPUBbits.WPUB3 = TRUE;
+    T3CKIPPS = 0b00001011;
+    T3CONbits.NOT_SYNC = TRUE;
+    T3CLKbits.CS = 0; //Source is T3CKIPPS
     
     //Common B
+    //TMR1 for bank B
     //TODO
     
     //Common C
+    //TMR5 for bank C
     //TODO
     
-    //Counters
-    T1CONbits.NOT_SYNC = TRUE;
-    T1CLKbits.CS = 0; //Source is T1CKIPPS
 }
 
 void measureSensors(void) {
@@ -113,15 +114,15 @@ void measureSensors(void) {
                 return;
             }
             //If it has, setup counters
-            TMR1L = 0;
-            TMR1H = 0;
-            TMR1CONbits.ON = TRUE;
             TMR3L = 0;
             TMR3H = 0;
-            TMR3CONbits.ON = TRUE;
+            T3CONbits.ON = TRUE;
+            TMR1L = 0;
+            TMR1H = 0;
+            T1CONbits.ON = TRUE;
             TMR5L = 0;
             TMR5H = 0;
-            TMR5CONbits.ON = TRUE;
+            T5CONbits.ON = TRUE;
             
             sensorState = READOUT;
             lastTransitionTime = msCount;
@@ -132,13 +133,17 @@ void measureSensors(void) {
                 return;
             }
             
+            //Shut down counters
+            T3CONbits.ON = FALSE;
+            T1CONbits.ON = FALSE;
+            T5CONbits.ON = FALSE;
+
             //Collect new values from counters
-            bankA.readings[sensorIndex] = (((unsigned int)(TMR1H))<<8)+TMR1L;
-            bankB.readings[sensorIndex] = (((unsigned int)(TMR3H))<<8)+TMR3L;
+            bankA.readings[sensorIndex] = (((unsigned int)(TMR3H))<<8)+TMR3L;
+            bankB.readings[sensorIndex] = (((unsigned int)(TMR1H))<<8)+TMR1L;
             bankC.readings[sensorIndex] = (((unsigned int)(TMR5H))<<8)+TMR5L;
             
-            //Shut down counters
-            T1CONbits.ON = FALSE;
+            
             
             //Turn off power
             switch (sensorIndex) {
