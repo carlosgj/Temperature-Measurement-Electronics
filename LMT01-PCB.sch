@@ -12293,6 +12293,9 @@ package type P</description>
 <part name="R5" library="resistor" deviceset="R-US_" device="R1206"/>
 <part name="SUPPLY32" library="supply2" deviceset="GND" device=""/>
 <part name="SUPPLY33" library="supply2" deviceset="+5V" device=""/>
+<part name="TP3" library="testpad" deviceset="TP" device="B1,27"/>
+<part name="TP4" library="testpad" deviceset="TP" device="B1,27"/>
+<part name="TP5" library="testpad" deviceset="TP" device="B1,27"/>
 </parts>
 <sheets>
 <sheet>
@@ -12368,6 +12371,9 @@ package type P</description>
 <instance part="R5" gate="G$1" x="-7.62" y="17.78" rot="R90"/>
 <instance part="SUPPLY32" gate="GND" x="-7.62" y="2.54"/>
 <instance part="SUPPLY33" gate="+5V" x="-7.62" y="25.4"/>
+<instance part="TP3" gate="G$1" x="170.18" y="-68.58"/>
+<instance part="TP4" gate="G$1" x="2.54" y="-104.14" rot="R90"/>
+<instance part="TP5" gate="G$1" x="81.28" y="-137.16" rot="R270"/>
 </instances>
 <busses>
 <bus name="TA1,TA2,TA3,TA4,TA5,TA6,TA7,TA8,TB1,TB2,TB3,TB4,TB5,TB6,TB7,TB8,TC1,TC2,TC3,TC4,TC5,TC6,TC7,TC8,COMMONA,COMMONB,COMMONC">
@@ -12557,7 +12563,7 @@ package type P</description>
 <label x="-10.16" y="-114.3" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="N$21" class="0">
+<net name="TX+" class="0">
 <segment>
 <pinref part="IC4" gate="G$1" pin="Y"/>
 <wire x1="-71.12" y1="-43.18" x2="-83.82" y2="-43.18" width="0.1524" layer="91"/>
@@ -12570,7 +12576,7 @@ package type P</description>
 <junction x="-83.82" y="-43.18"/>
 </segment>
 </net>
-<net name="N$22" class="0">
+<net name="TX-" class="0">
 <segment>
 <pinref part="IC4" gate="G$1" pin="Z"/>
 <wire x1="-71.12" y1="-48.26" x2="-78.74" y2="-48.26" width="0.1524" layer="91"/>
@@ -12581,7 +12587,7 @@ package type P</description>
 <wire x1="-116.84" y1="-48.26" x2="-109.22" y2="-48.26" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$23" class="0">
+<net name="RX+" class="0">
 <segment>
 <pinref part="IC4" gate="G$1" pin="A"/>
 <pinref part="X2" gate="-1" pin="4"/>
@@ -12593,7 +12599,7 @@ package type P</description>
 <wire x1="-66.04" y1="-78.74" x2="-83.82" y2="-78.74" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$24" class="0">
+<net name="RX-" class="0">
 <segment>
 <pinref part="IC4" gate="G$1" pin="B"/>
 <wire x1="-71.12" y1="-58.42" x2="-81.28" y2="-58.42" width="0.1524" layer="91"/>
@@ -12916,6 +12922,7 @@ package type P</description>
 <segment>
 <pinref part="XA" gate="G$1" pin="3"/>
 <wire x1="20.32" y1="20.32" x2="10.16" y2="20.32" width="0.1524" layer="91"/>
+<label x="12.7" y="20.32" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="R1" gate="G$1" pin="2"/>
@@ -12999,12 +13006,15 @@ package type P</description>
 <pinref part="R4" gate="G$1" pin="S"/>
 <pinref part="IC5" gate="A" pin="-IN"/>
 <wire x1="104.14" y1="-71.12" x2="144.78" y2="-71.12" width="0.1524" layer="91"/>
-<wire x1="144.78" y1="-71.12" x2="185.42" y2="-71.12" width="0.1524" layer="91"/>
+<wire x1="144.78" y1="-71.12" x2="170.18" y2="-71.12" width="0.1524" layer="91"/>
+<wire x1="170.18" y1="-71.12" x2="185.42" y2="-71.12" width="0.1524" layer="91"/>
 <wire x1="104.14" y1="-53.34" x2="104.14" y2="-71.12" width="0.1524" layer="91"/>
 <junction x="104.14" y="-71.12"/>
 <pinref part="IC5" gate="B" pin="-IN"/>
 <wire x1="144.78" y1="-53.34" x2="144.78" y2="-71.12" width="0.1524" layer="91"/>
 <junction x="144.78" y="-71.12"/>
+<pinref part="TP3" gate="G$1" pin="TP"/>
+<junction x="170.18" y="-71.12"/>
 </segment>
 </net>
 <net name="COMMONA_BUF" class="0">
@@ -13056,6 +13066,18 @@ package type P</description>
 <segment>
 <pinref part="LED1" gate="G$1" pin="A"/>
 <pinref part="R5" gate="G$1" pin="1"/>
+</segment>
+</net>
+<net name="N$6" class="0">
+<segment>
+<pinref part="IC1" gate="G$1" pin="RA5"/>
+<pinref part="TP4" gate="G$1" pin="TP"/>
+</segment>
+</net>
+<net name="N$7" class="0">
+<segment>
+<pinref part="IC1" gate="G$1" pin="RE0"/>
+<pinref part="TP5" gate="G$1" pin="TP"/>
 </segment>
 </net>
 </nets>
