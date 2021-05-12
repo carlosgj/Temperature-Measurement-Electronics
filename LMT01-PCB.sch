@@ -12286,9 +12286,6 @@ package type P</description>
 <part name="SUPPLY29" library="supply2" deviceset="+5V" device=""/>
 <part name="SUPPLY30" library="supply2" deviceset="GND" device=""/>
 <part name="SUPPLY31" library="supply2" deviceset="GND" device=""/>
-<part name="JP3" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NO" device="_SILK"/>
-<part name="JP4" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NO" device="_SILK"/>
-<part name="JP5" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NO" device="_SILK"/>
 <part name="LED1" library="led" deviceset="LED" device="CHIPLED_1206"/>
 <part name="R5" library="resistor" deviceset="R-US_" device="R1206"/>
 <part name="SUPPLY32" library="supply2" deviceset="GND" device=""/>
@@ -12296,6 +12293,9 @@ package type P</description>
 <part name="TP3" library="testpad" deviceset="TP" device="B1,27"/>
 <part name="TP4" library="testpad" deviceset="TP" device="B1,27"/>
 <part name="TP5" library="testpad" deviceset="TP" device="B1,27"/>
+<part name="TP6" library="testpad" deviceset="TP" device="B1,27"/>
+<part name="TP7" library="testpad" deviceset="TP" device="B1,27"/>
+<part name="TP8" library="testpad" deviceset="TP" device="B1,27"/>
 </parts>
 <sheets>
 <sheet>
@@ -12364,9 +12364,6 @@ package type P</description>
 <instance part="SUPPLY29" gate="+5V" x="149.86" y="7.62"/>
 <instance part="SUPPLY30" gate="GND" x="142.24" y="-12.7"/>
 <instance part="SUPPLY31" gate="GND" x="149.86" y="-12.7"/>
-<instance part="JP3" gate="G$1" x="73.66" y="-33.02"/>
-<instance part="JP4" gate="G$1" x="111.76" y="-35.56"/>
-<instance part="JP5" gate="G$1" x="154.94" y="-35.56"/>
 <instance part="LED1" gate="G$1" x="-7.62" y="10.16"/>
 <instance part="R5" gate="G$1" x="-7.62" y="17.78" rot="R90"/>
 <instance part="SUPPLY32" gate="GND" x="-7.62" y="2.54"/>
@@ -12374,6 +12371,9 @@ package type P</description>
 <instance part="TP3" gate="G$1" x="170.18" y="-68.58"/>
 <instance part="TP4" gate="G$1" x="2.54" y="-104.14" rot="R90"/>
 <instance part="TP5" gate="G$1" x="81.28" y="-137.16" rot="R270"/>
+<instance part="TP6" gate="G$1" x="58.42" y="-45.72"/>
+<instance part="TP7" gate="G$1" x="99.06" y="-45.72"/>
+<instance part="TP8" gate="G$1" x="139.7" y="-45.72"/>
 </instances>
 <busses>
 <bus name="TA1,TA2,TA3,TA4,TA5,TA6,TA7,TA8,TB1,TB2,TB3,TB4,TB5,TB6,TB7,TB8,TC1,TC2,TC3,TC4,TC5,TC6,TC7,TC8,COMMONA,COMMONB,COMMONC">
@@ -12931,11 +12931,10 @@ package type P</description>
 <pinref part="IC3" gate="A" pin="+IN"/>
 <wire x1="55.88" y1="-48.26" x2="55.88" y2="-43.18" width="0.1524" layer="91"/>
 <junction x="55.88" y="-48.26"/>
-<pinref part="JP3" gate="G$1" pin="1"/>
-<wire x1="66.04" y1="-48.26" x2="55.88" y2="-48.26" width="0.1524" layer="91"/>
-<wire x1="68.58" y1="-33.02" x2="66.04" y2="-33.02" width="0.1524" layer="91"/>
-<wire x1="66.04" y1="-33.02" x2="66.04" y2="-48.26" width="0.1524" layer="91"/>
-<junction x="66.04" y="-48.26"/>
+<wire x1="66.04" y1="-48.26" x2="58.42" y2="-48.26" width="0.1524" layer="91"/>
+<pinref part="TP6" gate="G$1" pin="TP"/>
+<wire x1="58.42" y1="-48.26" x2="55.88" y2="-48.26" width="0.1524" layer="91"/>
+<junction x="58.42" y="-48.26"/>
 </segment>
 </net>
 <net name="COMMONB" class="0">
@@ -12949,12 +12948,11 @@ package type P</description>
 <wire x1="96.52" y1="-53.34" x2="96.52" y2="-48.26" width="0.1524" layer="91"/>
 <pinref part="IC5" gate="A" pin="+IN"/>
 <wire x1="96.52" y1="-48.26" x2="96.52" y2="-43.18" width="0.1524" layer="91"/>
-<wire x1="104.14" y1="-48.26" x2="96.52" y2="-48.26" width="0.1524" layer="91"/>
+<wire x1="104.14" y1="-48.26" x2="99.06" y2="-48.26" width="0.1524" layer="91"/>
 <junction x="96.52" y="-48.26"/>
-<pinref part="JP4" gate="G$1" pin="1"/>
-<wire x1="106.68" y1="-35.56" x2="104.14" y2="-35.56" width="0.1524" layer="91"/>
-<wire x1="104.14" y1="-35.56" x2="104.14" y2="-48.26" width="0.1524" layer="91"/>
-<junction x="104.14" y="-48.26"/>
+<pinref part="TP7" gate="G$1" pin="TP"/>
+<wire x1="99.06" y1="-48.26" x2="96.52" y2="-48.26" width="0.1524" layer="91"/>
+<junction x="99.06" y="-48.26"/>
 </segment>
 </net>
 <net name="COMMONC" class="0">
@@ -12968,12 +12966,11 @@ package type P</description>
 <wire x1="137.16" y1="-53.34" x2="137.16" y2="-48.26" width="0.1524" layer="91"/>
 <pinref part="IC5" gate="B" pin="+IN"/>
 <wire x1="137.16" y1="-48.26" x2="137.16" y2="-43.18" width="0.1524" layer="91"/>
-<wire x1="144.78" y1="-48.26" x2="137.16" y2="-48.26" width="0.1524" layer="91"/>
+<wire x1="144.78" y1="-48.26" x2="139.7" y2="-48.26" width="0.1524" layer="91"/>
 <junction x="137.16" y="-48.26"/>
-<pinref part="JP5" gate="G$1" pin="1"/>
-<wire x1="149.86" y1="-35.56" x2="144.78" y2="-35.56" width="0.1524" layer="91"/>
-<wire x1="144.78" y1="-35.56" x2="144.78" y2="-48.26" width="0.1524" layer="91"/>
-<junction x="144.78" y="-48.26"/>
+<pinref part="TP8" gate="G$1" pin="TP"/>
+<wire x1="139.7" y1="-48.26" x2="137.16" y2="-48.26" width="0.1524" layer="91"/>
+<junction x="139.7" y="-48.26"/>
 </segment>
 </net>
 <net name="N$1" class="0">
@@ -13022,10 +13019,6 @@ package type P</description>
 <pinref part="IC3" gate="A" pin="OUT"/>
 <wire x1="81.28" y1="-50.8" x2="83.82" y2="-50.8" width="0.1524" layer="91"/>
 <label x="83.82" y="-50.8" size="1.778" layer="95"/>
-<pinref part="JP3" gate="G$1" pin="2"/>
-<wire x1="78.74" y1="-33.02" x2="81.28" y2="-33.02" width="0.1524" layer="91"/>
-<wire x1="81.28" y1="-33.02" x2="81.28" y2="-50.8" width="0.1524" layer="91"/>
-<junction x="81.28" y="-50.8"/>
 </segment>
 <segment>
 <pinref part="IC1" gate="G$1" pin="RB3"/>
@@ -13042,10 +13035,7 @@ package type P</description>
 <segment>
 <pinref part="IC5" gate="A" pin="OUT"/>
 <wire x1="119.38" y1="-50.8" x2="121.92" y2="-50.8" width="0.1524" layer="91"/>
-<pinref part="JP4" gate="G$1" pin="2"/>
-<wire x1="116.84" y1="-35.56" x2="119.38" y2="-35.56" width="0.1524" layer="91"/>
-<wire x1="119.38" y1="-35.56" x2="119.38" y2="-50.8" width="0.1524" layer="91"/>
-<junction x="119.38" y="-50.8"/>
+<label x="121.92" y="-50.8" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="COMMONC_BUF" class="0">
@@ -13057,9 +13047,7 @@ package type P</description>
 <segment>
 <pinref part="IC5" gate="B" pin="OUT"/>
 <wire x1="160.02" y1="-50.8" x2="162.56" y2="-50.8" width="0.1524" layer="91"/>
-<pinref part="JP5" gate="G$1" pin="2"/>
-<wire x1="160.02" y1="-35.56" x2="160.02" y2="-50.8" width="0.1524" layer="91"/>
-<junction x="160.02" y="-50.8"/>
+<label x="162.56" y="-50.8" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$5" class="0">
