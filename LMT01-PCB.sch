@@ -12369,6 +12369,8 @@ package type P</description>
 <part name="SUPPLY34" library="supply2" deviceset="GND" device=""/>
 <part name="SUPPLY35" library="supply2" deviceset="GND" device=""/>
 <part name="SUPPLY36" library="supply2" deviceset="GND" device=""/>
+<part name="R6" library="resistor" deviceset="R-US_" device="R1206" value="5k"/>
+<part name="SUPPLY37" library="supply2" deviceset="+5V" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -12389,7 +12391,7 @@ package type P</description>
 <instance part="JP2" gate="G$1" x="-60.96" y="-20.32"/>
 <instance part="R1" gate="G$1" x="55.88" y="-60.96" rot="R90"/>
 <instance part="SUPPLY16" gate="GND" x="55.88" y="-68.58"/>
-<instance part="PROG" gate="-1" x="83.82" y="-144.78"/>
+<instance part="PROG" gate="-1" x="124.46" y="-144.78"/>
 <instance part="PROG" gate="-2" x="2.54" y="-40.64"/>
 <instance part="PROG" gate="-3" x="2.54" y="-43.18"/>
 <instance part="PROG" gate="-4" x="0" y="-132.08" rot="R180"/>
@@ -12450,6 +12452,8 @@ package type P</description>
 <instance part="SUPPLY34" gate="GND" x="-48.26" y="-38.1"/>
 <instance part="SUPPLY35" gate="GND" x="-48.26" y="-63.5"/>
 <instance part="SUPPLY36" gate="GND" x="-48.26" y="-71.12"/>
+<instance part="R6" gate="G$1" x="119.38" y="-139.7" rot="R90"/>
+<instance part="SUPPLY37" gate="+5V" x="119.38" y="-132.08"/>
 </instances>
 <busses>
 <bus name="TA1,TA2,TA3,TA4,TA5,TA6,TA7,TA8,TB1,TB2,TB3,TB4,TB5,TB6,TB7,TB8,TC1,TC2,TC3,TC4,TC5,TC6,TC7,TC8,COMMONA,COMMONB,COMMONC">
@@ -12516,6 +12520,10 @@ package type P</description>
 <segment>
 <pinref part="IC6" gate="G$1" pin="VCC"/>
 <pinref part="SUPPLY10" gate="+5V" pin="+5V"/>
+</segment>
+<segment>
+<pinref part="R6" gate="G$1" pin="2"/>
+<pinref part="SUPPLY37" gate="+5V" pin="+5V"/>
 </segment>
 </net>
 <net name="GND" class="0">
@@ -13071,7 +13079,10 @@ package type P</description>
 <segment>
 <pinref part="IC1" gate="G$1" pin="RE3/!MCLR"/>
 <pinref part="PROG" gate="-1" pin="S"/>
-<wire x1="81.28" y1="-144.78" x2="78.74" y2="-144.78" width="0.1524" layer="91"/>
+<wire x1="121.92" y1="-144.78" x2="119.38" y2="-144.78" width="0.1524" layer="91"/>
+<pinref part="R6" gate="G$1" pin="1"/>
+<wire x1="119.38" y1="-144.78" x2="78.74" y2="-144.78" width="0.1524" layer="91"/>
+<junction x="119.38" y="-144.78"/>
 </segment>
 </net>
 <net name="N$2" class="0">
